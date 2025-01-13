@@ -1,6 +1,6 @@
 -- Premake5.lua
 
-workspace "E3D"
+workspace "GammaE_E3D"
     configurations { "Debug", "Release" }
     location "build" -- Where generated files (like Visual Studio solutions) will be stored
     architecture "x86_64"
@@ -15,6 +15,12 @@ project "E3D"
     -- Specify the root directory of the library
     local sourceRoot = os.getcwd()
 
+	-- specific defines for this project
+	defines {
+		"_NULL=0",
+		"_MBCS" 
+	}
+ 
     -- Recursively include all .cpp and .h files from the sourceRoot directory
     files {
         sourceRoot .. "/**.cpp",
@@ -61,6 +67,6 @@ project "E3D"
 
 -- Install rules (using a post-build step for example purposes)
 postbuildcommands {
-    "{MKDIR} %{wks.location}/dist/lib", -- Create output directory
-    "{COPYFILE} %{cfg.targetdir}/MyLibrary.lib %{wks.location}/dist/lib" -- Copy library to the dist directory
+    -- "{MKDIR} %{wks.location}/dist/lib", -- Create output directory
+    -- "{COPYFILE} %{cfg.targetdir}/MyLibrary.lib %{wks.location}/dist/lib" -- Copy library to the dist directory
 }
