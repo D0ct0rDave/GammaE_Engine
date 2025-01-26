@@ -11,9 +11,9 @@
 #ifndef CGSceneAnimTransfH
 #define CGSceneAnimTransfH
 // --------------------------------------------------------------------------------
-#include "Animation\CGSceneAnimObject.h"
+#include "Animation\CGSceneAnimNode.h"
 // --------------------------------------------------------------------------------
-class CGSceneAnimTransf : public CGSceneAnimObject
+class CGSceneAnimTransf : public CGSceneAnimNode
 {
     public:
         CGSceneAnimTransf();
