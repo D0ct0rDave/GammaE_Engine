@@ -18,9 +18,7 @@ CGMesh::CGMesh() :
     m_poVC(NULL),
     m_poTN(NULL),
     m_poUV2(NULL),
-    m_pusIdx(NULL),
-    m_uiMaxVXs(0),
-    m_uiMaxPrims(0)
+    m_pusIdx(NULL)
 {
     m_eMeshType = E3D_MT_Mesh;
 }
@@ -42,12 +40,7 @@ void CGMesh::Init(uint _uiNumVXs, uint _uiNumPrims, E3D_PrimitiveType _eMeshType
 {
     m_uiNumVXs = _uiNumVXs;
     m_uiNumPrims = _uiNumPrims;
-    m_uiMaxVXs = _uiNumVXs;
-    m_uiMaxPrims = _uiNumPrims;
-        
     m_ePrimitiveType = _eMeshType;
-
-    ComputeNumberOfIndices();
 
     if ( _uiFieldCreationMask & MESH_FIELD_VERTEXS ) m_poVX = mNew CGVect3[m_uiNumVXs];
     if ( _uiFieldCreationMask & MESH_FIELD_UVCOORDS ) m_poUV = mNew CGVect2[m_uiNumVXs];
@@ -56,27 +49,7 @@ void CGMesh::Init(uint _uiNumVXs, uint _uiNumPrims, E3D_PrimitiveType _eMeshType
     if ( _uiFieldCreationMask & MESH_FIELD_INDEXES ) m_pusIdx = mNew unsigned short[m_uiNumIdxs];
     if ( _uiFieldCreationMask & MESH_FIELD_TNORMALS ) m_poTN = mNew CGVect3[uiGetNumPrims()];
     if ( _uiFieldCreationMask & MESH_FIELD_UVCOORD2 ) m_poUV2 = mNew CGVect2[m_uiNumVXs];
-}
-// ----------------------------------------------------------------------------
-void CGMesh::SetNumVXs(uint _uiNumVXs)
-{
-    if (_uiNumVXs <= m_uiMaxVXs)
-    {
-        m_uiNumVXs = _uiNumVXs;
-    }
-}
-// ----------------------------------------------------------------------------
-void CGMesh::SetNumPrims(uint _uiNumPrims)
-{
-    if (_uiNumPrims <= m_uiMaxPrims)
-    {
-        m_uiNumPrims = _uiNumPrims;
-        ComputeNumberOfIndices();
-    }
-}
-// ----------------------------------------------------------------------------
-void CGMesh::ComputeNumberOfIndices()
-{
+
     switch (m_ePrimitiveType)
     {
     case E3D_PT_NONE:       m_uiNumIdxs = 0;
